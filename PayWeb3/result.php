@@ -1,9 +1,24 @@
 <?php
-	require_once('paygate.payweb3.php');
+	/*
+	 * Once the client has completed the transaction on the PayWeb page, they will be redirected to the RETURN_URL set in the initate
+	 * Here we will check the transaction status and process accordingly
+	 *
+	 */
 
+	/*
+	 * Sessions used here only because we can't get the PayGate ID, Transaction reference and secret key on the result page.
+	 */
     session_name('paygate_payweb3_testing_sample');
     session_start();
 
+	/*
+	 * Include the helper PayWeb 3 class
+	 */
+	require_once('paygate.payweb3.php');
+
+	/*
+	 * insert the returned data as well as the merchant specific data PAYGATE_ID and REFERENCE in array
+	 */
 	$data = array(
 		'PAYGATE_ID'         => $_SESSION['pgid'],
 		'PAY_REQUEST_ID'     => $_POST['PAY_REQUEST_ID'],
@@ -11,12 +26,18 @@
 		'REFERENCE'          => $_SESSION['reference']
 	);
 
+	/*
+	 * initiate the PayWeb 3 helper class
+	 */
 	$PayWeb3 = new PayGate_PayWeb3();
+	/*
+	 * Set the encryption key of your PayGate PayWeb3 configuration
+	 */
 	$PayWeb3->setEncryptionKey($_SESSION['key']);
-
-	$test_checksum = $PayWeb3->generateChecksum($data);
-
-	$data['CHECKSUM'] = $_POST['CHECKSUM'];
+	/*
+	 * Check that the checksum returned matches the checksum we generate
+	 */
+	$isValid = $PayWeb3->validateChecksum($data)
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -33,7 +54,7 @@
 			<div class="header-bar"><a class="btn btn-submit" href="input.php">Input</a> | <a class="btn btn-submit" href="query.php">Query</a></div>
 			<form action="query.php" method="post" name="query_paygate_form">
 				<label for="checksumResult">Checksum result</label>
-				<p id="checksumResult" class="form-value"><?php echo ($test_checksum != $data['CHECKSUM'] ? 'The checksums do not match: the calculated checksum is:<br>'.$test_checksum : 'Checksums match OK'); ?></p>
+				<p id="checksumResult" class="form-value"><?php echo (!$isValid ? 'The checksums do not match' : 'Checksums match OK'); ?></p>
 	            <hr>
 				<label for="PAY_REQUEST_ID">Pay Request ID</label>
 				<p id="PAY_REQUEST_ID" class="form-value"><?php echo $data['PAY_REQUEST_ID']; ?></p>

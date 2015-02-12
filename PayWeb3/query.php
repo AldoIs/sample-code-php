@@ -1,26 +1,45 @@
 <?php
-require_once('paygate.payweb3.php');
+	/*
+	 * Sessions used here only because we can't get the PayGate ID, Transaction reference and secret key on the result page.
+	 */
+	session_name('paygate_payweb3_testing_sample');
+	session_start();
 
-session_name('paygate_payweb3_testing_sample');
-session_start();
-session_destroy();
+	/*
+	 * Include the helper PayWeb 3 class
+	 */
+	require_once('paygate.payweb3.php');
 
-if(isset($_POST['btnSubmit'])){
-	$data = array(
-		'PAYGATE_ID'     => $_POST['PAYGATE_ID'],
-		'PAY_REQUEST_ID' => $_POST['PAY_REQUEST_ID'],
-		'REFERENCE'      => $_POST['REFERENCE']
-	);
+	if(isset($_POST['btnSubmit'])){
 
-	$encryption_key = $_POST['encryption_key'];
+		/*
+		 * Create array of data to query PAyGate with
+		 */
+		$data = array(
+			'PAYGATE_ID'     => $_POST['PAYGATE_ID'],
+			'PAY_REQUEST_ID' => $_POST['PAY_REQUEST_ID'],
+			'REFERENCE'      => $_POST['REFERENCE']
+		);
 
-	$PayWeb3 = new PayGate_PayWeb3();
-	$PayWeb3->setDebug(true);
-	$PayWeb3->setEncryptionKey($encryption_key);
-	$PayWeb3->setQueryRequest($data);
+		$encryption_key = $_POST['encryption_key'];
 
-	$returnData = $PayWeb3->doQuery();
-}
+		/*
+		 * Initiate the PayWeb 3 helper class
+		 */
+		$PayWeb3 = new PayGate_PayWeb3();
+		/*
+		 * Set the encryption key of your PayGate PayWeb3 configuration
+		 */
+		$PayWeb3->setEncryptionKey($encryption_key);
+		/*
+		 * Set the array of fields to be posted to PayGate
+		 */
+		$PayWeb3->setQueryRequest($data);
+		/*
+		 * Do the curl post to PayGate
+		 */
+		$returnData = $PayWeb3->doQuery();
+	}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -55,16 +74,31 @@ if(isset($_POST['btnSubmit'])){
 				<br>
 			</form>
 			<br>
-<?php if(isset($PayWeb3->queryResponse) || isset($PayWeb3->lastError)){ ?>
+<?php if(isset($PayWeb3->queryResponse) || isset($PayWeb3->lastError)){
+	/*
+	 * We have received a response from PayWeb3
+	 */
+	?>
 	<div class="container-center">
 		<div class="well">
 			<?php if(!isset($PayWeb3->lastError)){
-				foreach($PayWeb3->queryResponse as $key => $value){ ?>
+				/*
+				 * It is not an error, so continue
+				 */
+				foreach($PayWeb3->queryResponse as $key => $value){
+					/*
+					 * Loop through the key / value pairs returned
+					 */
+
+					?>
 					<label for="<?php echo $key; ?>"><?php echo $key; ?></label>
 					<p class="form-value"><?php echo $value; ?></p>
 					<br>
 				<?php }
 			} else if(isset($PayWeb3->lastError)){
+				/*
+				 * otherwise handle the error response
+				 */
 				echo $PayWeb3->lastError;
 			} ?>
 		</div>

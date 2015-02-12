@@ -1,16 +1,28 @@
 <?php
-session_name('paygate_payweb3_testing_sample');
-session_start();
-session_destroy();
+	/*
+	 * This is an example page of the form fields required for a PayGate PayWeb 3 transaction.
+	 */
 
-function generateReference(){
-	return 'pgtest_'.getDateTime('YmdHis');
-}
+	/*
+	 * Sessions used here only because we can't get the PayGate ID, Transaction reference and secret key on the result page.
+	 *
+	 * First input so we make sure there is nothing in the session.
+	 */
+	session_name('paygate_payweb3_testing_sample');
+	session_start();
+	session_destroy();
 
-function getDateTime($format){
-	$dateTime = new DateTime();
-	return $dateTime->format($format);
-}
+	/*
+	 * example function to generate unique transaction reference
+	 */
+	function generateReference(){
+		return 'pgtest_' . getDateTime('YmdHis');
+	}
+
+	function getDateTime($format){
+		$dateTime = new DateTime();
+		return $dateTime->format($format);
+	}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

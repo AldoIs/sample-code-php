@@ -166,7 +166,7 @@ class PayGate_PayWeb3{
 	 * Function to format date / time. php's DateTime object used to overcome limitation of standard date() function.
 	 * DateTime available from PHP 5.2.0
 	 *
-	 * @param $format
+	 * @param string $format
 	 * @return string
 	 */
 	public function getDateTime($format){
@@ -183,6 +183,7 @@ class PayGate_PayWeb3{
 	/**
 	 * Function to generate the checksum to be passed in the initiate call. Refer to examples on Page 15 of the PayWeb3 documentation
 	 *
+	 * @param array $postData
 	 * @return string (md5 hash value)
 	 */
 	public function generateChecksum($postData){
@@ -201,6 +202,22 @@ class PayGate_PayWeb3{
 		}
 
 		return md5($checksum);
+	}
+
+	/**
+	 * function to compare checksums
+	 *
+	 * @param array $data
+	 * @return bool
+	 */
+	public function validateChecksum($data){
+
+		$returnedChecksum = $data['CHECKSUM'];
+		unset($data['CHECKSUM']);
+
+		$checksum = $this->generateChecksum($data);
+
+		return ($returnedChecksum == $checksum);
 	}
 
 	/**
