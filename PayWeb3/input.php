@@ -13,7 +13,15 @@
 	session_destroy();
 
 	/*
-	 * example function to generate unique transaction reference
+	 * Directory stuff
+	 */
+	include_once('lib/functions.php');
+
+	$fullPath  = getCurrentUrl();
+	$directory = getFinalDirectory($fullPath);
+
+	/*
+	 * Example function to generate unique transaction reference
 	 */
 	function generateReference(){
 		return 'pgtest_' . getDateTime('YmdHis');
@@ -40,7 +48,7 @@
 			<div class="header-bar"><a class="btn btn-submit" href="input.php">Input</a> | <a class="btn btn-submit" href="query.php">Query</a></div>
 			<form action="request.php" method="post" name="paygate_initiate_form">
 				<label for="PAYGATE_ID">PayGate ID</label>
-				<input class="form-input" type="text" name="PAYGATE_ID" id="PAYGATE_ID" value="10011013800" />
+				<input class="form-input" type="text" name="PAYGATE_ID" id="PAYGATE_ID" value="10011072130" />
 				<br>
 				<label for="REFERENCE">Reference</label>
 				<input class="form-input" type="text" name="REFERENCE" id="REFERENCE" value="<?php echo generateReference(); ?>" />
@@ -52,7 +60,7 @@
 				<input class="form-input" type="text" name="CURRENCY" id="CURRENCY" value="ZAR" />
 				<br>
 				<label for="RETURN_URL">Return URL</label>
-				<input class="form-input" type="text" name="RETURN_URL" id="RETURN_URL" value="http://<?php echo $_SERVER["SERVER_NAME"];?>/testing/paywebv3/sampleCode/result.php" />
+				<input class="form-input" type="text" name="RETURN_URL" id="RETURN_URL" value="<?php echo $directory;?>result.php" />
 				<br>
 				<label for="TRANSACTION_DATE">Transaction Date</label>
 				<input class="form-input" type="text" name="TRANSACTION_DATE" id="TRANSACTION_DATE" value="<?php echo getDateTime('Y-m-d H:i:s'); ?>" />
@@ -317,7 +325,7 @@
 				</select>
 				<br>
 				<label for="EMAIL">Customer Email</label>
-				<input class="form-input" type="text" name="EMAIL" id="EMAIL" value="itsupport@paygate.co.za" />
+				<input class="form-input" type="text" name="EMAIL" id="EMAIL" value="support@paygate.co.za" />
 				<br>
 				<div id="extraFieldsDiv" class="well">
 					<label for="PAY_METHOD">Pay Method</label>
@@ -357,10 +365,10 @@
 							Vault card
 						</label>
 					</div>
-					<label for="VAULT_ID" class="col-sm-3 control-label">Vault ID</label>
+					<label for="VAULT_ID">Vault ID</label>
 					<input class="form-control" type="text" name="VAULT_ID" id="VAULT_ID" placeholder="optional" />
 				</div>
-				<label for="encryption_key" class="col-sm-3 control-label">Encryption Key</label>
+				<label for="encryption_key">Encryption Key</label>
 				<input class="form-control" type="text" name="encryption_key" id="encryption_key" value="secret" />
 				<br>
 				<input class="btn btn-submit" type="submit" name="btnSubmit" value="Calculate Checksum" />

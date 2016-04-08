@@ -23,7 +23,8 @@
 		'PAYGATE_ID'         => $_SESSION['pgid'],
 		'PAY_REQUEST_ID'     => $_POST['PAY_REQUEST_ID'],
 		'TRANSACTION_STATUS' => $_POST['TRANSACTION_STATUS'],
-		'REFERENCE'          => $_SESSION['reference']
+		'REFERENCE'          => $_SESSION['reference'],
+		'CHECKSUM'           => $_POST['CHECKSUM']
 	);
 
 	/*

@@ -57,7 +57,7 @@
 			<div class="header-bar"><a class="btn btn-submit" href="input.php">Input</a> | <a class="btn btn-submit" href="query.php">Query</a></div>
 			<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 				<label for="PAYGATE_ID">PayGate ID</label>
-				<input class="form-input" type="text" name="PAYGATE_ID" id="PAYGATE_ID" value="<?php echo ($data['PAYGATE_ID'] != '' ? $data['PAYGATE_ID'] : '10011013800'); ?>" />
+				<input class="form-input" type="text" name="PAYGATE_ID" id="PAYGATE_ID" value="<?php echo ($data['PAYGATE_ID'] != '' ? $data['PAYGATE_ID'] : '10011072130'); ?>" />
 				<br>
 				<label for="PAY_REQUEST_ID">Pay Request ID</label>
 				<input class="form-input" type="text" name="PAY_REQUEST_ID" id="PAY_REQUEST_ID" value="<?php echo ($data['PAY_REQUEST_ID'] != '' ? $data['PAY_REQUEST_ID'] : ''); ?>" />
