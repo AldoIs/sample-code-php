@@ -5,6 +5,8 @@
 	session_name('paygate_payweb3_testing_sample');
 	session_start();
 
+	include_once('../lib/php/global.inc.php');
+
 	/*
 	 * Include the helper PayWeb 3 class
 	 */
@@ -47,63 +49,114 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
 		<title>PayWeb 3 - Query</title>
-		<link rel="stylesheet" href="css/paygate.css">
+		<link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../lib/css/core.css">
 	</head>
 	<body>
-		<div class="container">
-			<div class="header">
-				<img src="images/paygate-logo.png" alt="PayGate" height="60" width="175" /><span>PayWeb 3 Sample Code - Query</span>
-			</div>
-			<div class="header-bar"><a class="btn btn-submit" href="input.php">Input</a> | <a class="btn btn-submit" href="query.php">Query</a></div>
-			<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-				<label for="PAYGATE_ID">PayGate ID</label>
-				<input class="form-input" type="text" name="PAYGATE_ID" id="PAYGATE_ID" value="<?php echo ($data['PAYGATE_ID'] != '' ? $data['PAYGATE_ID'] : '10011072130'); ?>" />
+		<div class="container-fluid" style="min-width: 320px;">
+			<nav class="navbar navbar-inverse navbar-fixed-top">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="">
+							<img alt="PayGate" src="../lib/images/paygate_logo_mini.png" />
+						</a>
+						<span style="color: #f4f4f4; font-size: 18px; line-height: 45px; margin-right: 10px;"><strong>PayWeb 3</strong></span>
+					</div>
+					<div class="collapse navbar-collapse" id="navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li>
+								<a href="/<?php echo $root; ?>/PayWeb3/index.php">Initiate</a>
+							</li>
+							<li class="active">
+								<a href="/<?php echo $root; ?>/PayWeb3/query.php">Query</a>
+							</li>
+							<li>
+								<a href="/<?php echo $root; ?>/PayWeb3/simple_query.php">Simple query</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<div style="background-color:#80b946; text-align: center; margin-top: 51px; margin-bottom: 15px; padding: 4px;"><strong>Query</strong></div>
+			<div class="container">
+				<form role="form" class="form-horizontal text-left" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+					<div class="form-group">
+						<label for="PAYGATE_ID" class="col-sm-3 control-label">PayGate ID</label>
+						<div class="col-sm-6">
+							<input type="text" name="PAYGATE_ID" id="PAYGATE_ID" class="form-control" value="<?php echo ($data['PAYGATE_ID'] != '' ? $data['PAYGATE_ID'] : '10011072130'); ?>" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="PAY_REQUEST_ID" class="col-sm-3 control-label">Pay Request ID</label>
+						<div class="col-sm-6">
+							<input type="text" name="PAY_REQUEST_ID" id="PAY_REQUEST_ID" class="form-control" value="<?php echo ($data['PAY_REQUEST_ID'] != '' ? $data['PAY_REQUEST_ID'] : ''); ?>" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="REFERENCE" class="col-sm-3 control-label">Reference</label>
+						<div class="col-sm-6">
+							<input type="text" name="REFERENCE" id="REFERENCE" class="form-control" value="<?php echo ($data['REFERENCE'] != '' ? $data['REFERENCE'] : ''); ?>" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="encryption_key" class="col-sm-3 control-label">Encryption Key</label>
+						<div class="col-sm-6">
+							<input type="text" name="encryption_key" id="encryption_key" class="form-control" value="<?php echo ($encryption_key != '' ? $encryption_key : 'secret'); ?>" />
+						</div>
+					</div>
+					<br>
+					<div class="form-group">
+						<div class="col-sm-offset-4 col-sm-2">
+							<input type="submit" id="doQueryBtn" class="btn btn-success btn-block" value="Do Query" name="btnSubmit">
+						</div>
+						<div class="col-sm-2">
+							<a href="index.php" class="btn btn-primary btn-block">New Transaction</a>
+						</div>
+					</div>
+				</form>
 				<br>
-				<label for="PAY_REQUEST_ID">Pay Request ID</label>
-				<input class="form-input" type="text" name="PAY_REQUEST_ID" id="PAY_REQUEST_ID" value="<?php echo ($data['PAY_REQUEST_ID'] != '' ? $data['PAY_REQUEST_ID'] : ''); ?>" />
-				<br>
-				<label for="REFERENCE">Reference</label>
-				<input class="form-input" type="text" name="REFERENCE" id="REFERENCE" value="<?php echo ($data['REFERENCE'] != '' ? $data['REFERENCE'] : ''); ?>" />
-				<br>
-				<label for="encryption_key">Encryption Key</label>
-				<input class="form-input" type="text" name="encryption_key" id="encryption_key" value="<?php echo ($encryption_key != '' ? $encryption_key : 'secret'); ?>" />
-				<br>
-				<input class="btn btn-submit" id="doQueryBtn" type="submit" name="btnSubmit" value="Do Query" />
-
-				<a class="btn btn-submit" href="input.php">New Transaction</a>
-				<br>
-			</form>
-			<br>
 <?php if(isset($PayWeb3->queryResponse) || isset($PayWeb3->lastError)){
 	/*
 	 * We have received a response from PayWeb3
 	 */
 	?>
-	<div class="container-center">
-		<div class="well">
-			<?php if(!isset($PayWeb3->lastError)){
-				/*
-				 * It is not an error, so continue
-				 */
-				foreach($PayWeb3->queryResponse as $key => $value){
-					/*
-					 * Loop through the key / value pairs returned
-					 */
+					<div class="well">
+						<?php if(!isset($PayWeb3->lastError)){
+							/*
+							 * It is not an error, so continue
+							 */
+							foreach($PayWeb3->queryResponse as $key => $value){
+								/*
+								 * Loop through the key / value pairs returned
+								 */
 
-					?>
-					<label for="<?php echo $key; ?>"><?php echo $key; ?></label>
-					<p class="form-value"><?php echo $value; ?></p>
-					<br>
-				<?php }
-			} else if(isset($PayWeb3->lastError)){
-				/*
-				 * otherwise handle the error response
-				 */
-				echo $PayWeb3->lastError;
-			} ?>
-		</div>
-	</div>
+								echo <<<HTML
+								<div class="row">
+									<label for="{$key}_RESPONSE" class="col-sm-3">{$key}</label>
+									<div class="col-sm-9">
+										<p id="{$key}_RESPONSE">{$value}</p>
+									</div>
+								</div>
+HTML;
+							}
+						} else if(isset($PayWeb3->lastError)){
+							/*
+							 * otherwise handle the error response
+							 */
+							echo $PayWeb3->lastError;
+						} ?>
+					</div>
 <?php } ?>
-</div>
-</body>
+			</div>
+		</div>
+		<script type="text/javascript" src="../lib/js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="../lib/js/bootstrap.min.js"></script>
+	</body>
 </html>

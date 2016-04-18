@@ -13,6 +13,9 @@ Products that have sample code:
 
 PayWeb 3 
         - PHP
+		
+PayHost
+		- PHP
 
 +--------------------------------------------------------------------------+
 ```
