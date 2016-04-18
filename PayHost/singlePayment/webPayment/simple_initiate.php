@@ -1,6 +1,6 @@
 <?php
 	/*
-	 * This is an example page of the form fields required for a PayGate PayWeb 3 transaction.
+	 * This is an example page of the form fields required for a PayGate PayHost transaction.
 	 */
 	include_once('../../../lib/php/global.inc.php');
 

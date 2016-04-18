@@ -19,6 +19,12 @@
 	$checksumSource = $_SESSION['pgid'] . $PAY_REQUEST_ID . $TRANSACTION_STATUS . $_SESSION['reference'] . $_SESSION['key'];
 
 	$checksum = md5($checksumSource);
+
+	echo $checksumSource . PHP_EOL;
+
+	echo $checksum;
+
+	session_destroy();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -34,26 +40,10 @@
 				<div class="container-fluid">
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
 						<a class="navbar-brand" href="">
 							<img alt="PayGate" src="../lib/images/paygate_logo_mini.png" />
 						</a>
-						<span style="color: #f4f4f4; font-size: 18px; line-height: 45px; margin-right: 10px;"><strong>PayHost Web Payment</strong></span>
-					</div>
-					<div class="collapse navbar-collapse" id="navbar-collapse">
-						<ul class="nav navbar-nav">
-							<li>
-								<a href="<?php echo $directory; ?>index.php">Initiate</a>
-							</li>
-							<li>
-								<a href="<?php echo $directory; ?>query.php">Query</a>
-							</li>
-						</ul>
+						<span style="color: #f4f4f4; font-size: 18px; line-height: 45px; margin-right: 10px;"><strong>PayHost Result</strong></span>
 					</div>
 				</div>
 			</nav>
@@ -68,8 +58,7 @@
 
 			        echo <<<HTML
 				<div class="row">
-	                <label class="col-sm-3 text-right">Checksum</label>
-	                <div class="col-sm-9">
+	                <div class="col-xs-12 text-center">
 	                    <p>{$checksumMsg}</p>
 	                </div>
 	            </div>
@@ -91,13 +80,6 @@ HTML;
 	                <label class="col-sm-3 text-right">Checksum</label>
 	                <div class="col-sm-9">
 	                    <p><?php echo $CHECKSUM; ?></p>
-	                </div>
-	            </div>
-	            <br>
-	            <div class="row">
-	                <label class="col-sm-3 text-right">Do Another:</label>
-	                <div class="col-sm-9">
-	                    <a class="btn btn-primary" href="singlePayment/webPayment/index.php" role="button">WebPayment</a>
 	                </div>
 	            </div>
 	        </div>

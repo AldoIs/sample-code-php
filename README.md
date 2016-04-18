@@ -11,11 +11,13 @@
 +--------------------------------------------------------------------------+
 Products that have sample code:
 
-PayWeb 3 
-        - PHP
+PayWeb 3
 		
 PayHost
-		- PHP
+		- CardPayment
+		- WebPayment
+		- SingleFollowUp
+		  - Query
 
 +--------------------------------------------------------------------------+
 ```

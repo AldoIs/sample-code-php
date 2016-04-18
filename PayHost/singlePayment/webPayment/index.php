@@ -1,6 +1,6 @@
 <?php
 	/*
-	 * This is an example page of the form fields required for a PayGate PayWeb 3 transaction.
+	 * This is an example page of the form fields required for a PayGate PayHost Web Payment transaction.
 	 */
 	include_once('../../../lib/php/global.inc.php');
 
@@ -423,7 +423,7 @@ HTML;
 						<div class="form-group">
 							<label for="notifyURL" class="col-sm-3 control-label">Notify URL</label>
 							<div class="col-sm-9">
-								<input class="form-control" type="text" name="notifyURL" id="notifyURL" value="<?php echo(isset($notifyURL) ? $notifyURL :''); ?>" />
+								<input class="form-control" type="text" name="notifyURL" id="notifyURL" value="<?php echo(isset($notifyURL) ? $notifyURL :$fullPath['protocol'] . $fullPath['host'] . '/' . $root . '/PayHost/notify.php'); ?>" />
 							</div>
 						</div>
 						<div class="form-group">
