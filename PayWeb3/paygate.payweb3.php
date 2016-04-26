@@ -305,7 +305,7 @@ class PayGate_PayWeb3{
 
 			//url-ify the data for the POST
 			foreach($postData as $key => $value){
-				$fields_string .= $key . '=' . $value . '&';
+				$fields_string .= $key . '=' . urlencode($value) . '&';
 			}
 			//remove trailing '&'
 			$fields_string = rtrim($fields_string, '&');
@@ -326,7 +326,7 @@ class PayGate_PayWeb3{
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($ch, CURLOPT_NOBODY, false);
 			curl_setopt($ch, CURLOPT_REFERER, $_SERVER['HTTP_HOST']);
-			curl_setopt($ch, CURLOPT_POST, count($postData));
+			curl_setopt($ch, CURLOPT_POST, 1);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
 
 			//execute post
