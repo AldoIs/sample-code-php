@@ -4,7 +4,7 @@
  * Class to do initiate and Query functions to PayGate for PayWeb 3
  *
  * @author PayGate
- * @version 0.1
+ * @version 0.2
  *
  */
 class PayGate_PayWeb3{
