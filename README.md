@@ -18,6 +18,10 @@ PayHost
 		- WebPayment
 		- SingleFollowUp
 		  - Query
+		- SingleVault
+		  - CardVault
+		  - DeleteVault
+		  - LookupVault
 
 +--------------------------------------------------------------------------+
 ```
