@@ -21,6 +21,7 @@ The below example code and testing interface has been provided.
 **SinglePayment**
 - CardPayment
 - WebPayment
+- TokenPayment
 
 **SingleFollowup**
 - Query
