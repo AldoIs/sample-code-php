@@ -6,7 +6,6 @@ The below example code and testing interface has been provided.
 ### To Do:
 - Video walkthrough
 - Update to new DPO | PayGate branding
-- Add missing PayHost endpoints; SinglePayment/TokenPayment, SingleFollowup/Void, SingleFollowup/Settlement, SingleFollowup/Refund
 
 ## PayWeb3
 
@@ -26,6 +25,9 @@ The below example code and testing interface has been provided.
 
 **SingleFollowup**
 - Query
+- Void
+- Settlement
+- Refund
 
 **SingleVault**
 - CardVault
