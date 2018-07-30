@@ -34,6 +34,9 @@
 		} else if ($identifier == 'transid'){
 			//If Transaction ID is used
 			$xmlQuery = '<ns1:TransactionId>'.$transId.'</ns1:TransactionId>';
+		} else if ($identifier == 'reference'){
+			//Merch reference is used
+			$xmlQuery = '<ns1:MerchantOrderId>'.$reference.'</ns1:MerchantOrderId>';
 		}
 
 		$xml = <<<XML
