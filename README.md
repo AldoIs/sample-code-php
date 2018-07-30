@@ -5,7 +5,6 @@ The below example code and testing interface has been provided.
 
 ### To Do:
 - Video walkthrough
-- Update to new DPO | PayGate branding
 
 ## PayWeb3
 
