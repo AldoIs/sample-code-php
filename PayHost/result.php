@@ -47,7 +47,7 @@
 					</div>
 				</div>
 			</nav>
-			<div style="background-color:#80b946; text-align: center; margin-top: 51px; margin-bottom: 15px; padding: 4px;"><strong>Result</strong></div>
+			<div style="background-color:#57B7DF; text-align: center; margin-top: 51px; margin-bottom: 15px; padding: 4px;"><strong>Result</strong></div>
 	        <div class="container-center">
 		        <?php
 			        if($checksum != $CHECKSUM){

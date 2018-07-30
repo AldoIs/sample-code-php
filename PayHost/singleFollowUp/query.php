@@ -34,6 +34,9 @@
 		} else if ($identifier == 'transid'){
 			//If Transaction ID is used
 			$xmlQuery = '<ns1:TransactionId>'.$transId.'</ns1:TransactionId>';
+		} else if ($identifier == 'reference'){
+			//Merch reference is used
+			$xmlQuery = '<ns1:MerchantOrderId>'.$reference.'</ns1:MerchantOrderId>';
 		}
 
 		$xml = <<<XML
@@ -114,7 +117,7 @@ XML;
 					</div>
 				</div>
 			</nav>
-			<div style="background-color:#80b946; text-align: center; margin-top: 51px; margin-bottom: 15px; padding: 4px;"><strong>Query</strong></div>
+			<div style="background-color:#57B7DF; text-align: center; margin-top: 51px; margin-bottom: 15px; padding: 4px;"><strong>Query</strong></div>
 		    <div class="container">
 		        <form role="form" class="form-horizontal text-left" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 		            <div class="form-group">
