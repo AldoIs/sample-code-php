@@ -112,7 +112,7 @@
 					</div>
 				</div>
 			</nav>
-			<div style="background-color:#80b946; text-align: center; margin-top: 51px; margin-bottom: 15px; padding: 4px;"><strong>Step: Request / Redirect</strong></div>
+			<div style="background-color:#57B7DF; text-align: center; margin-top: 51px; margin-bottom: 15px; padding: 4px;"><strong>Step: Request / Redirect</strong></div>
 			<div class="container">
 				<form role="form" class="form-horizontal text-left" action="<?php echo $PayWeb3::$process_url ?>" method="post" name="paygate_process_form">
 					<div class="form-group">

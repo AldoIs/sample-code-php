@@ -54,7 +54,7 @@
 					</div>
 				</div>
 			</nav>
-			<div style="background-color:#80b946; text-align: center; margin-top: 51px; margin-bottom: 15px; padding: 4px;"><strong>Step 1: Initiate</strong></div>
+			<div style="background-color:#57B7DF; text-align: center; margin-top: 51px; margin-bottom: 15px; padding: 4px;"><strong>Step 1: Initiate</strong></div>
 			<div class="container">
 				<form role="form" class="form-horizontal text-left" action="request.php" method="post" name="paygate_initiate_form">
 					<div class="form-group">
