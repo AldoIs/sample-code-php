@@ -21,7 +21,7 @@
 	$mandatoryFields = array(
 		'PAYGATE_ID'        => filter_var($_POST['PAYGATE_ID'], FILTER_SANITIZE_STRING),
 		'REFERENCE'         => filter_var($_POST['REFERENCE'], FILTER_SANITIZE_STRING),
-		'AMOUNT'            => filter_var($_POST['AMOUNT'], FILTER_SANITIZE_NUMBER_INT),
+		'AMOUNT'            => filter_var($_POST['AMOUNT'] * 100, FILTER_SANITIZE_NUMBER_INT),
 		'CURRENCY'          => filter_var($_POST['CURRENCY'], FILTER_SANITIZE_STRING),
 		'RETURN_URL'        => filter_var($_POST['RETURN_URL'], FILTER_SANITIZE_URL),
 		'TRANSACTION_DATE'  => filter_var($_POST['TRANSACTION_DATE'], FILTER_SANITIZE_STRING),
