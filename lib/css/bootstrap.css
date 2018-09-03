@@ -2887,8 +2887,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-success.active,
 .open > .dropdown-toggle.btn-success {
   color: #ffffff;
-  background-color: #669438;
-  border-color: #547a2e;
+  background-color: #0f3c77;
+  border-color: #0f3c77;
 }
 .btn-success:active,
 .btn-success.active,
@@ -4527,7 +4527,7 @@ a.label:focus {
 }
 .label-success[href]:hover,
 .label-success[href]:focus {
-  background-color: #669438;
+  background-color: #0f3c77;
 }
 .label-info {
   background-color: #5bc0de;
